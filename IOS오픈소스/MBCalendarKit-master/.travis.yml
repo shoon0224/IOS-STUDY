@@ -1,0 +1,22 @@
+language: objective-c
+xcode_project: MBCalendarKit.xcodeproj
+xcode_scheme: MBCalendarKit
+xcode_destination: platform=iOS Simulator,OS=10.1,name=iPad Pro (9.7-inch)
+env:
+  global:
+  - FRAMEWORK_NAME=MBCalendarKit
+before_install:
+- brew update
+- brew outdated carthage || brew upgrade carthage
+before_deploy:
+- carthage build --no-skip-current
+- carthage archive $FRAMEWORK_NAME
+deploy:
+  provider: releases
+  api_key:
+    secure: JC1U4FLamU4QgLYxsQYm2WJ5rUw12+Mica1ktjhih1GKyyyidQ6xx/duuXL//AgMnDUM/5RyC8zDo0icWL1cDf9itpyW+Hhco89uw39aUboGll56WIY2go9sZ8Tpv6nZlPR0wA71izO7uhWiUFDX+dLuAVIgJFjOT6OQA55tTZM=
+  file: "$FRAMEWORK_NAME.framework.zip"
+  skip_cleanup: true
+  on:
+    repo: MosheBerman/MBCalendarKit
+    tags: true
