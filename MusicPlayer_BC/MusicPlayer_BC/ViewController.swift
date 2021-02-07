@@ -32,7 +32,12 @@ class ViewController: UIViewController, AVAudioPlayerDelegate {
     //MARK: Custom Method
     func initializePlayer() {
         
+        
+        let sliderProgress: Float = 10.0
+        self.sliderProgress.value = sliderProgress
         guard let soundAsset: NSDataAsset = NSDataAsset(name:"sound") else {
+            //guard는 if와 같은 의미
+            // 만약 선언한 soundAsset: NSDataAsset이라는 타입에 이름이 sound라는 애가 들어가 있으면 불러오고 아니면 else
             print("음원 파일 에셋을 가져올 수 없습니다.")
             return
         }
